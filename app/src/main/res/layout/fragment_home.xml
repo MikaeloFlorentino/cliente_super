@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="87dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="80dp"
+        android:text="Area Super"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_area"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="87dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="80dp"
+        android:text="Area Casa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/spinner_casa"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_area" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="87dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="80dp"
+        android:text="Atiende"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <Spinner
+        android:id="@+id/spinner_atiende"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_casa" />
+
+    <EditText
+        android:id="@+id/editTextArticulo"
+        android:layout_width="319dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Articulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/button_alta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="60dp"
+
+        android:text="Agregar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextArticulo" />
+
+    <!-- Here are the existing layout elements, now wrapped in
+            a CoordinatorLayout -->
+    <LinearLayout
+        android:id="@+id/Mensajero"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- …Toolbar, other layouts, other elements… -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
