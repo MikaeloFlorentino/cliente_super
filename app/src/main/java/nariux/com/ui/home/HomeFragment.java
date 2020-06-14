@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -29,7 +30,7 @@ public class HomeFragment extends Fragment {
     private Spinner spinnerArea;
     private Spinner spinnerAtiende;
     private Spinner spinnerCasa;
-    private String articulo;
+    private EditText articulo;
     private ClientHttp clientHttp;
     private Snackbar sySnackbar;
     private Button boton;
@@ -53,10 +54,10 @@ public class HomeFragment extends Fragment {
 
     public void enviaForm(View v){
         Super s = new Super();
-        s.setArea_atiende(spinnerAtiende.getSelectedItem().toString());
+        s.setAtiende(spinnerAtiende.getSelectedItem().toString());
         s.setArea_super(spinnerArea.getSelectedItem().toString());
         s.setArea_casa(spinnerCasa.getSelectedItem().toString());
-        s.setArticulo(String.valueOf(v.findViewById(R.id.editTextArticulo)));
+        s.setArticulo(articulo.getText().toString());
         Super ret = clientHttp.agregarLista(s);
         if(ret.getId()!=-1){
 
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
 
     private void inicia(Context c, View r){
         clientHttp = new ClientHttp();
+        articulo = (EditText) r.findViewById(R.id.editTextArticulo);
         boton = (Button) r.findViewById(R.id.button_alta);
         spinnerArea=(Spinner) r.findViewById(R.id.spinner_area);
         spinnerAtiende=(Spinner) r.findViewById(R.id.spinner_atiende);

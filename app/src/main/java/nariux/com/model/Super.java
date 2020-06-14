@@ -1,15 +1,19 @@
 package nariux.com.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Super {
     private int id;
     private String area_super;
     private String area_casa;
-    private String area_atiende;
+    private String atiende;
     private String articulo;
     private boolean comprado;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date created_at;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updated_at;
 
     public int getId() {
@@ -36,12 +40,12 @@ public class Super {
         this.area_casa = area_casa;
     }
 
-    public String getArea_atiende() {
-        return area_atiende;
+    public String getAtiende() {
+        return atiende;
     }
 
-    public void setArea_atiende(String area_atiende) {
-        this.area_atiende = area_atiende;
+    public void setAtiende(String atiende) {
+        this.atiende = atiende;
     }
 
     public String getArticulo() {
