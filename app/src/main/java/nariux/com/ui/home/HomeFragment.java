@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
         Super ret = clientHttp.agregarLista(s);
         if(ret.getId()!=-1){
 
-            Snackbar.make(v, "Simon", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(v, "Arre, ya se guardo", Snackbar.LENGTH_SHORT).show();
         }else{
 
             Snackbar.make(v, "Fail beivy", Snackbar.LENGTH_SHORT).show();

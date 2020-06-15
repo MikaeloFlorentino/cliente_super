@@ -10,15 +10,13 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import nariux.com.model.Super;
 import nariux.com.utils.Utilidades;
 
-public class ClientHttp {
+public class ClientHttp <T>{
 
 
     private static final MediaType MediaTypeJSON = MediaType
@@ -27,8 +25,8 @@ public class ClientHttp {
 //    private static final String URI_SUPER = "https://super.nariux.com/api/super/";
 
     private OkHttpClient httpclient;
-
     private ObjectMapper mapper;
+
     public ClientHttp(){
 
         httpclient = new OkHttpClient();
@@ -39,30 +37,18 @@ public class ClientHttp {
     }
 
     private Super agregaList(Super s) throws IOException {
-        Super createdSuper = null;
-        // convert the book to JSON by Jackson
-        String jsonBook = mapper.writeValueAsString(s);
-
-        // build a request
-        Request request = new Request.Builder().url(URI_SUPER).addHeader("Content-Type", "application/json")
-                .post(RequestBody.create(MediaTypeJSON, jsonBook)).build();
-        // build a request
-        //Response response = httpclient.newCall(request).execute();
-
-        //try (
-                Response response = httpclient.newCall(request).execute();// {
-            if (response.isSuccessful()) {
-                // Get back the response and convert it to a Book object
-                createdSuper = mapper.readValue(response.body().bytes(), Super.class);
-
-            }else {
-                createdSuper = null;
-            }
-
-        //}
-
-
-        return createdSuper;
+        Super createdSuper;
+        String json = mapper.writeValueAsString(s);
+        Request request = new Request.Builder()
+                .url(URI_SUPER)
+                .addHeader("Content-Type", "application/json")
+                .post(RequestBody.create(MediaTypeJSON, json)).build();
+        Response response = httpclient.newCall(request).execute();// {
+        if (response.isSuccessful()) {
+            return mapper.readValue(response.body().bytes(), Super.class);
+        }else {
+            return null;
+        }
     }
 
     private ArrayList<Super> getSuperc() throws IOException {
@@ -93,6 +79,19 @@ public class ClientHttp {
         return createdSuper;
     }
 
+    private void actualizaCompradoArticulo(Super s)  throws IOException {
+        String json = mapper.writeValueAsString(s);
+
+        // build a request
+        Request request = new Request.Builder().url(URI_SUPER+"comprado").addHeader("Content-Type", "application/json")
+                .put(RequestBody.create(MediaTypeJSON, json)).build();
+        // build a request
+        //Response response = httpclient.newCall(request).execute();
+
+        //try (
+        Response response = httpclient.newCall(request).execute();// {
+
+    }
     public Super agregarLista(Super s){
         Super ret= new Super();
         try {
@@ -121,6 +120,7 @@ public class ClientHttp {
         return listSuper;
         //return null;
     }
+
     public Super setElimina(Super s){
         Super r = null;
         try {
@@ -129,6 +129,14 @@ public class ClientHttp {
             e.printStackTrace();
         }finally {
             return r;
+        }
+    }
+
+    public void actualizaComprado(Super s){
+        try {
+            actualizaCompradoArticulo(s);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -24,6 +24,7 @@ import java.util.List;
 
 // import nariux.com.AdapterSuperList;
 // import nariux.com.MainActivity;
+import nariux.com.AdapterSuperList;
 import nariux.com.R;
 import nariux.com.conection.ClientHttp;
 import nariux.com.model.Super;
@@ -52,10 +53,12 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 clientHttp.setElimina(getList().get(position));
-                //traeSuper();
                 Toast.makeText(getContextClass(), "Eliminaste: "+ getList().get(position).getArticulo(), Toast.LENGTH_LONG).show();
+                traeSuper();
             }
         });
+
+
 
 
 /*        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,18 +87,18 @@ public class GalleryFragment extends Fragment {
            names.add(s.getArticulo());
         }
 
-        listview.setAdapter(getMyAdapter(names));
-        //listview.setAdapter(getAdapterSuperList());
+        //listview.setAdapter(getMyAdapter(names));
+        listview.setAdapter(getAdapterSuperList());
     }
 
     private MyAdapter getMyAdapter(ArrayList<String> list){
         return  new MyAdapter(getContextClass(), R.layout.simple_list_item_1, list);
     }
 
-    /*private AdapterSuperList getAdapterSuperList(){
+    private AdapterSuperList getAdapterSuperList(){
         AdapterSuperList adapter = new AdapterSuperList(getContextClass(), listSuper);
         return adapter;
-    }*/
+    }
     private Context getContextClass(){ return this.getContext(); }
     private List<Super> getList(){ return listSuper;}
 }
