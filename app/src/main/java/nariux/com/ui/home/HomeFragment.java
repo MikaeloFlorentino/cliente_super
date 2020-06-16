@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 import nariux.com.R;
 import nariux.com.conection.ClientHttp;
 import nariux.com.model.Super;
+import nariux.com.utils.Utilidades;
 
 public class HomeFragment extends Fragment {
 
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private ClientHttp clientHttp;
     private Snackbar sySnackbar;
     private Button boton;
+    private Utilidades utilidades;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment {
                 //textView.setText(s);
             }
         });
+        utilidades = new Utilidades();
         inicia(this.getContext(), root);
         return root;
     }
@@ -62,6 +65,7 @@ public class HomeFragment extends Fragment {
         if(ret.getId()!=-1){
 
             Snackbar.make(v, "Arre, ya se guardo", Snackbar.LENGTH_SHORT).show();
+            articulo.setText("");
         }else{
 
             Snackbar.make(v, "Fail beivy", Snackbar.LENGTH_SHORT).show();
@@ -76,9 +80,9 @@ public class HomeFragment extends Fragment {
         spinnerArea=(Spinner) r.findViewById(R.id.spinner_area);
         spinnerAtiende=(Spinner) r.findViewById(R.id.spinner_atiende);
         spinnerCasa=(Spinner) r.findViewById(R.id.spinner_casa);
-        spinnerArea.setAdapter(getAdapter(c, R.array.areas_array));
-        spinnerAtiende.setAdapter(getAdapter(c, R.array.atiende_array));
-        spinnerCasa.setAdapter(getAdapter(c, R.array.casa_array));
+        spinnerArea.setAdapter(utilidades.getAdapter(c, R.array.areas_array));
+        spinnerAtiende.setAdapter(utilidades.getAdapter(c, R.array.atiende_array));
+        spinnerCasa.setAdapter(utilidades.getAdapter(c, R.array.casa_array));
 
         boton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,11 +94,11 @@ public class HomeFragment extends Fragment {
         });
 
     }
-
+/*
     private SpinnerAdapter getAdapter(Context c, int areas_array) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(c,
                 areas_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return adapter;
-    }
+    }*/
 }

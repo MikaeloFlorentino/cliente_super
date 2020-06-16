@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 // import android.widget.ArrayAdapter;
 // import android.widget.CompoundButton;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 // import android.widget.Switch;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +26,12 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-// import nariux.com.AdapterSuperList;
+// import nariux.com.ui.gallery.AdapterSuperList;
 // import nariux.com.MainActivity;
-import nariux.com.AdapterSuperList;
 import nariux.com.R;
 import nariux.com.conection.ClientHttp;
 import nariux.com.model.Super;
+import nariux.com.utils.Utilidades;
 
 
 public class GalleryFragment extends Fragment {
@@ -38,14 +42,22 @@ public class GalleryFragment extends Fragment {
     private TextView textView;
     private ListView listview;
     private ArrayList<Super> listSuper;
-
+    private Button refrescar;
+    private Spinner spinnerArea;
+    private Utilidades utilidades;
+    private Switch switch12 ;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         /*galleryViewModel =
                 ViewModelProviders.of(this).get(GalleryViewModel.class);*/
+        utilidades = new Utilidades();
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         textView = root.findViewById(R.id.textView5);
         listview = root.findViewById(R.id.Liston);
+        refrescar = root.findViewById(R.id.button_refrescar);
+        spinnerArea = root.findViewById(R.id.spinnerArea);
+        spinnerArea.setAdapter(utilidades.getAdapter(getContextClass(), R.array.areas_array));
+        Switch switch12 = root.findViewById(R.id.switch12);
         clientHttp = new ClientHttp();
 
 
@@ -58,7 +70,35 @@ public class GalleryFragment extends Fragment {
             }
         });
 
+        switch12.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+            }
+
+            //@Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position) {
+                getList().get(position).setComprado(isChecked);
+                galleryViewModel.actualizaComprado(getList().get(position));
+            }
+        });
+/*
+
+
+        switch12.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                supers.setComprado(isChecked);
+                galleryViewModel.actualizaComprado(supers);
+            }
+        });*/
+
+        refrescar.setOnClickListener(new AdapterView.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                traeSuper();
+            }
+        });
 
 
 /*        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

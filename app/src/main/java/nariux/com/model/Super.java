@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class Super {
-    private int id;
+public class Super extends ModelId {
+    //private int id;
     private String area_super;
     private String area_casa;
     private String atiende;
@@ -16,14 +16,18 @@ public class Super {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updated_at;
 
-    public int getId() {
+    public Super(){
+        super();
+    }
+
+/*    public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-
+*/
     public String getArea_super() {
         return area_super;
     }

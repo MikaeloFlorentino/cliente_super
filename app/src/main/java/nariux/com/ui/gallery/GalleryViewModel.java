@@ -26,6 +26,10 @@ public class GalleryViewModel extends ViewModel {
         clientHttp.actualizaComprado(s);
     }
 
+    public void eliminar(Super s){
+        clientHttp.setElimina(s);
+    }
+
     public LiveData<String> getText() {
         return mText;
     }

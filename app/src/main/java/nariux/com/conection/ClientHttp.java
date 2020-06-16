@@ -21,8 +21,8 @@ public class ClientHttp <T>{
 
     private static final MediaType MediaTypeJSON = MediaType
             .parse("application/json; charset=utf-8");
-    private static final String URI_SUPER = "http://192.168.1.81:8000/api/super/";
-//    private static final String URI_SUPER = "https://super.nariux.com/api/super/";
+    private static final String URI_SUPER = "http://192.168.1.81:8000/api/super";
+//    private static final String URI_SUPER = "https://super.nariux.com/api/super";
 
     private OkHttpClient httpclient;
     private ObjectMapper mapper;
@@ -66,7 +66,7 @@ public class ClientHttp <T>{
 
     private Super setEliminaId(Super s)  throws IOException {
         Super createdSuper;
-        Request request = new Request.Builder().url(URI_SUPER+s.getId()).addHeader("Content-Type", "application/json")
+        Request request = new Request.Builder().url(URI_SUPER+"/"+s.getId()).addHeader("Content-Type", "application/json")
                 .delete().build();
         Response response = httpclient.newCall(request).execute();// {
         if (response.isSuccessful()) {
@@ -83,7 +83,7 @@ public class ClientHttp <T>{
         String json = mapper.writeValueAsString(s);
 
         // build a request
-        Request request = new Request.Builder().url(URI_SUPER+"comprado").addHeader("Content-Type", "application/json")
+        Request request = new Request.Builder().url(URI_SUPER+"/comprado").addHeader("Content-Type", "application/json")
                 .put(RequestBody.create(MediaTypeJSON, json)).build();
         // build a request
         //Response response = httpclient.newCall(request).execute();
