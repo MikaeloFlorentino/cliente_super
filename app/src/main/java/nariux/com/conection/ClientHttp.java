@@ -21,8 +21,8 @@ public class ClientHttp <T>{
 
     private static final MediaType MediaTypeJSON = MediaType
             .parse("application/json; charset=utf-8");
-    private static final String URI_SUPER = "http://192.168.1.81:8000/api/super";
-//    private static final String URI_SUPER = "https://super.nariux.com/api/super";
+//    private static final String URI_SUPER = "http://192.168.1.81:8000/api/super";
+    private static final String URI_SUPER = "https://super.nariux.com/api/super";
 
     private OkHttpClient httpclient;
     private ObjectMapper mapper;

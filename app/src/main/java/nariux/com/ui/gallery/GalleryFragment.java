@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 // import android.widget.ArrayAdapter;
 // import android.widget.CompoundButton;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -28,7 +29,7 @@ import java.util.List;
 
 // import nariux.com.ui.gallery.AdapterSuperList;
 // import nariux.com.MainActivity;
-import nariux.com.AdapterSuperList;
+import nariux.com.ui.gallery.AdapterSuperList;
 import nariux.com.R;
 import nariux.com.conection.ClientHttp;
 import nariux.com.model.Super;
@@ -105,9 +106,9 @@ public class GalleryFragment extends Fragment {
         return  new MyAdapter(getContextClass(), R.layout.simple_list_item_1, list);
     }
 
-    private AdapterSuperList getAdapterSuperList(){
+    private ArrayAdapter getAdapterSuperList(){
         //AdapterSuperList adapter = new AdapterSuperList(getContextClass(), listSuper);
-        AdapterSuperList adapter = new AdapterSuperList(this.getActivity(), listSuper);
+        ArrayAdapter<Super> adapter = new AdapterSuperList(this.getActivity(), listSuper);
         return adapter;
     }
     private Context getContextClass(){ return this.getContext(); }
