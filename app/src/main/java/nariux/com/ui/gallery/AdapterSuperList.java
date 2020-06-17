@@ -23,16 +23,19 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
 
     private GalleryViewModel galleryViewModel;
     private final Activity context;
+    ArrayList<Super> supersList;
 
     public AdapterSuperList(Activity context, ArrayList<Super> supers) {
         super(context, 0, supers);
         this.context=context;
+        this.supersList=supers;
         galleryViewModel = new GalleryViewModel();
     }
 
     public AdapterSuperList(Context context, ArrayList<Super> supers) {
         super(context, 0, supers);
         this.context=null;
+        this.supersList=supers;
         galleryViewModel = new GalleryViewModel();
     }
 
@@ -62,8 +65,8 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
             viewHolder.comprado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    supers.setComprado(isChecked);
-                    galleryViewModel.actualizaComprado(supers);
+                    //supers.setComprado(isChecked);
+                    //galleryViewModel.actualizaComprado(supers);
                 }
             });
 
@@ -77,10 +80,11 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.articulo.setText(supers.getArticulo());
         holder.area.setText(supers.getArea_super());
-        holder.comprado.setChecked(supers.isComprado());
+        if (supersList.indexOf(supers) == position) {
+            holder.comprado.setChecked(supers.isComprado());
+        }
         return view;
     }
-
 
 /*
     @Override
