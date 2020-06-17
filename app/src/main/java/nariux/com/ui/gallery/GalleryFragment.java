@@ -28,6 +28,7 @@ import java.util.List;
 
 // import nariux.com.ui.gallery.AdapterSuperList;
 // import nariux.com.MainActivity;
+import nariux.com.AdapterSuperList;
 import nariux.com.R;
 import nariux.com.conection.ClientHttp;
 import nariux.com.model.Super;
@@ -46,6 +47,7 @@ public class GalleryFragment extends Fragment {
     private Spinner spinnerArea;
     private Utilidades utilidades;
     private Switch switch12 ;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         /*galleryViewModel =
@@ -60,38 +62,6 @@ public class GalleryFragment extends Fragment {
         Switch switch12 = root.findViewById(R.id.switch12);
         clientHttp = new ClientHttp();
 
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                clientHttp.setElimina(getList().get(position));
-                Toast.makeText(getContextClass(), "Eliminaste: "+ getList().get(position).getArticulo(), Toast.LENGTH_LONG).show();
-                traeSuper();
-            }
-        });
-
-        switch12.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-            }
-
-            //@Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked, int position) {
-                getList().get(position).setComprado(isChecked);
-                galleryViewModel.actualizaComprado(getList().get(position));
-            }
-        });
-/*
-
-
-        switch12.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                supers.setComprado(isChecked);
-                galleryViewModel.actualizaComprado(supers);
-            }
-        });*/
 
         refrescar.setOnClickListener(new AdapterView.OnClickListener(){
             @Override
@@ -136,7 +106,8 @@ public class GalleryFragment extends Fragment {
     }
 
     private AdapterSuperList getAdapterSuperList(){
-        AdapterSuperList adapter = new AdapterSuperList(getContextClass(), listSuper);
+        //AdapterSuperList adapter = new AdapterSuperList(getContextClass(), listSuper);
+        AdapterSuperList adapter = new AdapterSuperList(this.getActivity(), listSuper);
         return adapter;
     }
     private Context getContextClass(){ return this.getContext(); }
