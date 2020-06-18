@@ -2,48 +2,57 @@ package nariux.com.ui.gallery;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
 
 import java.util.ArrayList;
 
+import controller.SuperOnClickListener;
 import nariux.com.R;
 import nariux.com.model.Super;
-import nariux.com.ui.gallery.GalleryViewModel;
 
 public class AdapterSuperList  extends ArrayAdapter<Super> {
 
     private GalleryViewModel galleryViewModel;
     private final Activity context;
     ArrayList<Super> supersList;
+    SuperOnClickListener superOnClickListener;
 
     public AdapterSuperList(Activity context, ArrayList<Super> supers) {
         super(context, 0, supers);
         this.context=context;
         this.supersList=supers;
-        galleryViewModel = new GalleryViewModel();
+    }
+
+    public void setSuperOnClickListener(SuperOnClickListener superOnClickListener) {
+        this.superOnClickListener = superOnClickListener;
+    }
+
+    public void setGalleryViewModel(GalleryViewModel galleryViewModel) {
+        this.galleryViewModel = galleryViewModel;
+    }
+
+    public void swapItems(ArrayList<Super> supers) {
+        this.supersList = supers;
+        notifyDataSetChanged();
     }
 
     public AdapterSuperList(Context context, ArrayList<Super> supers) {
         super(context, 0, supers);
         this.context=null;
         this.supersList=supers;
-        galleryViewModel = new GalleryViewModel();
     }
 
 
     static class ViewHolder {
         protected TextView articulo;
         protected TextView area;
-        protected Switch comprado;
+        protected AppCompatCheckBox comprado;
     }
 
 
@@ -58,18 +67,7 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.articulo = (TextView) view.findViewById(R.id.textView);
             viewHolder.area = (TextView) view.findViewById(R.id.textViewArea);
-            viewHolder.comprado = (Switch) view.findViewById(R.id.switch12);
-
-
-            // Return the completed view to render on screen
-            viewHolder.comprado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    //supers.setComprado(isChecked);
-                    //galleryViewModel.actualizaComprado(supers);
-                }
-            });
-
+            viewHolder.comprado = (AppCompatCheckBox) view.findViewById(R.id.chb_superlist_comprado);
             view.setTag(viewHolder);
             viewHolder.comprado.setTag(supers);
         }else {
@@ -77,11 +75,24 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
             ((ViewHolder) view.getTag()).comprado.setTag(supers);
         }
 
-        ViewHolder holder = (ViewHolder) view.getTag();
+        final ViewHolder holder = (ViewHolder) view.getTag();
         holder.articulo.setText(supers.getArticulo());
         holder.area.setText(supers.getArea_super());
         if (supersList.indexOf(supers) == position) {
             holder.comprado.setChecked(supers.isComprado());
+        }
+
+        holder.comprado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                superOnClickListener.onCheckedSuper(holder.comprado,position);
+            }
+        });
+
+        if (supersList.get(position).isComprado()) {
+            holder.comprado.setChecked(true);
+        } else {
+            holder.comprado.setChecked(false);
         }
         return view;
     }
@@ -97,7 +108,7 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.articulo = (TextView) convertView.findViewById(R.id.textView);
             viewHolder.area = (TextView) convertView.findViewById(R.id.textViewArea);
-            viewHolder.comprado = (Switch) convertView.findViewById(R.id.switch12);
+            viewHolder.comprado = (Switch) convertView.findViewById(R.id.chb_superlist_comprado);
 
 
             // Return the completed view to render on screen
@@ -138,7 +149,7 @@ public class AdapterSuperList  extends ArrayAdapter<Super> {
 
         TextView articulo = (TextView) convertView.findViewById(R.id.textView);
         TextView area = (TextView) convertView.findViewById(R.id.textViewArea);
-        Switch comprado = (Switch) convertView.findViewById(R.id.switch12);
+        Switch comprado = (Switch) convertView.findViewById(R.id.chb_superlist_comprado);
 
         articulo.setText(supers.getArticulo());
         area.setText(supers.getArea_super());

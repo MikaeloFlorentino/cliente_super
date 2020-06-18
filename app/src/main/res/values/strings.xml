@@ -8,6 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="snackBar">Mensajero</string>
+    <string name="loading">Cargando</string>
 
     <string name="menu_home">Agregar</string>
     <string name="menu_gallery">Liesta Completa</string>
