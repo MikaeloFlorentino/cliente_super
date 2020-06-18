@@ -20,8 +20,8 @@
         android:textColor="#333"
         android:layout_gravity="center_vertical"
         android:text="TextView" />
-    <Switch
-        android:id="@+id/switch12"
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/chb_superlist_comprado"
         IsToggled="{Binding userProfileTO.userId,  Converter={StaticResource userIdExistConverter}}"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
