@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button_refrescar" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBoxComprado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -53,7 +53,7 @@
         android:layout_marginTop="40dp"
         android:text="Articulo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxComprado" />
 
     <TextView
         android:id="@+id/textView5"
@@ -71,7 +71,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="8dp"
         android:text="Refrescar"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxComprado"
         app:layout_constraintTop_toBottomOf="@+id/spinnerArea" />
 
     <TextView

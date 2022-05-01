@@ -21,7 +21,7 @@ public class ClientHttp <T>{
 
     private static final MediaType MediaTypeJSON = MediaType
             .parse("application/json; charset=utf-8");
-//    private static final String URI_SUPER = "http://192.168.1.81:8000/api/super";
+//  private static final String URI_SUPER = "http://192.168.1.81:8000/api/super";
     private static final String URI_SUPER = "https://super.nariux.com/api/super";
 
     private OkHttpClient httpclient;
@@ -64,6 +64,21 @@ public class ClientHttp <T>{
         return listSuper;
     }
 
+    private ArrayList<Super> getSuperc(String area, boolean comprado, String atiende) throws IOException {
+        Super createdSuper = null;
+        String URL_EXTRA="/"+area+"/comprado/"+comprado+"/atiende/"+atiende;
+        System.out.println(URI_SUPER+URL_EXTRA);
+        ArrayList<Super> listSuper=null;
+        Request request = new Request.Builder().url(URI_SUPER+URL_EXTRA).addHeader("Content-Type", "application/json")
+                .get().build();
+        Response response = httpclient.newCall(request).execute();//
+            if (response.isSuccessful()) {
+            listSuper = new ArrayList<Super>( Arrays.asList(mapper.readValue(response.body().string(), Super[].class))) ;
+        }
+
+            return listSuper;
+    }
+
     private Super setEliminaId(Super s)  throws IOException {
         Super createdSuper;
         Request request = new Request.Builder().url(URI_SUPER+"/"+s.getId()).addHeader("Content-Type", "application/json")
@@ -92,6 +107,16 @@ public class ClientHttp <T>{
         Response response = httpclient.newCall(request).execute();// {
 
     }
+
+    private void vacia()throws IOException {
+        Request request = new Request.Builder()
+                .url(URI_SUPER+"/vacia")
+                .addHeader("Content-Type", "application/json")
+                .post(RequestBody.create(MediaTypeJSON, "")).build();
+        Response response = httpclient.newCall(request).execute();// {
+
+    }
+
     public Super agregarLista(Super s){
         Super ret= new Super();
         try {
@@ -121,6 +146,17 @@ public class ClientHttp <T>{
         //return null;
     }
 
+    public ArrayList<Super> getSuper(String area, boolean comprado, String atiende){
+        ArrayList<Super> listSuper= null;
+        try {
+            listSuper = getSuperc(area,  comprado, atiende);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listSuper;
+        //return null;
+    }
+
     public Super setElimina(Super s){
         Super r = null;
         try {
@@ -140,6 +176,14 @@ public class ClientHttp <T>{
         }
     }
 
+    public void vaciar(){
+
+        try {
+            vacia();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public Super actualizaArticulo(Super s){
         return s;
     }

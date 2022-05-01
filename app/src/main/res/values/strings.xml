@@ -11,10 +11,11 @@
     <string name="loading">Cargando</string>
 
     <string name="menu_home">Agregar</string>
-    <string name="menu_gallery">Liesta Completa</string>
-    <string name="menu_slideshow">Sobre la app</string>
+    <string name="menu_gallery">Lista Completa</string>
+    <string name="menu_slideshow">Restaurar</string>
 
     <string-array name="areas_array">
+        <item>Todo</item>
         <item>panaderia</item>
         <item>frutas y verdudas</item>
         <item>salchineria</item>

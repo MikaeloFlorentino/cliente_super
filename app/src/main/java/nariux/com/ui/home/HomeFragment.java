@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
     private Snackbar sySnackbar;
     private Button boton;
     private Utilidades utilidades;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -62,6 +64,7 @@ public class HomeFragment extends Fragment {
         s.setArea_casa(spinnerCasa.getSelectedItem().toString());
         s.setArticulo(articulo.getText().toString());
         Super ret = clientHttp.agregarLista(s);
+
         if(ret.getId()!=-1){
 
             Snackbar.make(v, "Arre, ya se guardo", Snackbar.LENGTH_SHORT).show();

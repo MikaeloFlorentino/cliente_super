@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import android.widget.CheckBox;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class GalleryFragment extends Fragment implements SuperOnClickListener {
     private Spinner spinnerArea;
     private Utilidades utilidades;
     private ProgressDialog progressDialog;
+    private CheckBox comprado;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class GalleryFragment extends Fragment implements SuperOnClickListener {
         refrescar = root.findViewById(R.id.button_refrescar);
         spinnerArea = root.findViewById(R.id.spinnerArea);
         spinnerArea.setAdapter(utilidades.getAdapter(getContextClass(), R.array.areas_array));
+        comprado =  (CheckBox) root.findViewById(R.id.checkBoxComprado);
         clientHttp = new ClientHttp();
         galleryViewModel= new GalleryViewModel();
         this.progressDialog = new ProgressDialog(requireContext());
@@ -80,8 +83,11 @@ public class GalleryFragment extends Fragment implements SuperOnClickListener {
 
     private void traeSuper(){
         showLoading(requireContext().getResources().getString(R.string.loading));
-
-        listSuper= clientHttp.getSuper();
+        boolean c = comprado.isChecked();
+        String area = spinnerArea.getSelectedItem().toString();
+        System.out.println("ASDASD"+area);
+        //showLoading(area);
+        listSuper= clientHttp.getSuper(area, c, "Todos");
 
         textView.setText("total:" + listSuper.size());
         ArrayList<String> names = new ArrayList<String>();
